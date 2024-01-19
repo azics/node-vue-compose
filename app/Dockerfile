@@ -1,5 +1,4 @@
-# Stage 1 - Build the Vite Vue App
-FROM node:14 AS builder
+FROM node:14 as builder
 
 WORKDIR /app
 
@@ -9,7 +8,6 @@ RUN npm install
 COPY app .
 RUN npm run build
 
-# Stage 2 - Create the final image with Nginx
 FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
